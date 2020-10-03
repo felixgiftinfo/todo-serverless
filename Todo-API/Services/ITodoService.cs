@@ -12,6 +12,7 @@ namespace Todo_API.Services
         Task<TodoReadDTO> AddTodo(TodoDTO todo);
         Task<bool> UpdateTodo(TodoDTO todo, string id);
         Task<bool> UpdateMissedTodo( string id);
+        Task<bool> UpdateCancelledTodo(string id);
         Task<long> DeleteTodo(string id);
         Task<IEnumerable<TodoReadDTO>> GetTodoList();
         Task<TodoReadDTO> GetTodoById(string id);
