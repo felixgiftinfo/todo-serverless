@@ -13,6 +13,7 @@ namespace Todo_API.Services
         Task<bool> UpdateTodo(TodoDTO todo, string id);
         Task<long> DeleteTodo(string id);
         Task<IEnumerable<TodoReadDTO>> GetTodoList();
+        Task<TodoReadDTO> GetTodoById(string id);
 
     }
 }

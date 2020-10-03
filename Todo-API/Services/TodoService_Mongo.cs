@@ -86,6 +86,27 @@ namespace Todo_API.Services
                 }
             }
         }
+        public async Task<TodoReadDTO> GetTodoById(string id)
+        {
+            _logger.LogInformation("Call to GetTodoById function was made.");
+
+            try
+            {
+                var filter = Builders<TodoModel>.Filter.Eq("Id", id);
+                // var model2 = await this.Todos.Find<TodoModel>(filter).FirstOrDefaultAsync();
+                var model = await this.Todos.Find<TodoModel>(x => x.Id == id).FirstOrDefaultAsync();
+                var modelDTO = _mapper.Map<TodoReadDTO>(model);
+
+                _logger.LogInformation("Call to GetTodoById function completed.");
+
+                return modelDTO;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Call to GetTodoById function was terminated.");
+                throw new Exception("Call to GetTodoById function was terminated.");
+            }
+        }
 
         public async Task<TodoReadDTO> AddTodo(TodoDTO todo)
         {
