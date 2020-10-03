@@ -14,24 +14,21 @@ using Todo_API.DTOs;
 
 namespace Todo_API.Functions
 {
-    public class InsertTodo
+    public class UpdateTodo
     {
         private readonly ITodoService _service;
-        public InsertTodo(ITodoService service)
+        public UpdateTodo(ITodoService service)
         {
             _service = service;
         }
 
-        [FunctionName(nameof(InsertTodo))]
+        [FunctionName(nameof(UpdateTodo))]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function,  "post", Route = "todo")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Function,  "put", Route = "todo/{id}")] HttpRequest req, string id)
         {
-            //string name = req.Query["name"];
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<TodoDTO>(requestBody);
-            var result = await this._service.AddTodo(data);
-
+            var result = await this._service.UpdateTodo(data, id);
             return new OkObjectResult(result);
         }
 

@@ -10,6 +10,7 @@ namespace Todo_API.Services
     public interface ITodoService
     {
         Task<TodoReadDTO> AddTodo(TodoDTO todo);
+        Task<bool> UpdateTodo(TodoDTO todo, string id);
 
     }
 }

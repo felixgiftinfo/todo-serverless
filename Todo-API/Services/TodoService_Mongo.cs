@@ -86,5 +86,30 @@ namespace Todo_API.Services
             }
         }
 
+        public async Task<bool> UpdateTodo(TodoDTO todo, string id)
+        {
+            _logger.LogInformation("Call to UpdateTodo function made");
+
+            using (var session = await _client.StartSessionAsync())
+            {
+                try
+                {
+                    session.StartTransaction();
+                    var model = _mapper.Map<TodoModel>(todo);
+                    model.Id = id;
+                    var replacedItem = await this.Todos.ReplaceOneAsync(session, x => x.Id == id, model);
+                    await session.CommitTransactionAsync();
+
+                    _logger.LogInformation("Call to UpdateTodo function completed.");
+                    return replacedItem != null;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation("Call to UpdateTodo function was terminate.");
+                    await session.AbortTransactionAsync();
+                    throw ex;
+                }
+            }
+        }
     }
 }
