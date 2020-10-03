@@ -228,6 +228,39 @@ namespace Todo_API.Services
                 }
             }
         }
+        public async Task<bool> UpdateCompletedTodo(string id)
+        {
+            _logger.LogInformation("Call to UpdateCompletedTodo function made");
+
+            using (var session = await _client.StartSessionAsync())
+            {
+                try
+                {
+                    session.StartTransaction();
+                    var model = await this.Todos.Find<TodoModel>(session, x => x.Id == id).FirstOrDefaultAsync();
+                    if (model == null)
+                    {
+                        _logger.LogInformation("Call to UpdateCompletedTodo function was terminate because Id not found.");
+                        throw new KeyNotFoundException("Id not found.");
+                    }
+                    model.Completed = true;
+                    model.Cancelled = false;
+                    model.Missed = false;
+
+                    var replacedItem = await this.Todos.ReplaceOneAsync(session, x => x.Id == id, model);
+                    await session.CommitTransactionAsync();
+
+                    _logger.LogInformation("Call to UpdateCompletedTodo function completed.");
+                    return replacedItem != null;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation("Call to UpdateCompletedTodo function was terminate.");
+                    await session.AbortTransactionAsync();
+                    throw ex;
+                }
+            }
+        }
 
         public async Task<long> DeleteTodo(string id)
         {
