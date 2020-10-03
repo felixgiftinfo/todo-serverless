@@ -59,6 +59,34 @@ namespace Todo_API.Services
             }
         }
 
+        public async Task<IEnumerable<TodoReadDTO>> GetTodoList()
+        {
+            _logger.LogInformation("Call to GetTodo function was made");
+            using (var session = await _client.StartSessionAsync())
+            {
+                try
+                {
+                    List<TodoReadDTO> models = new List<TodoReadDTO>();
+                    //var results = await this.Todos.Find<TodoModel>(session, new BsonDocument()).ToListAsync();
+                    var results = await this.Todos.Find<TodoModel>(session, x => true).ToListAsync();
+                    foreach (var item in results)
+                    {
+                        var modelDTO = _mapper.Map<TodoReadDTO>(item);
+                        models.Add(modelDTO);
+                    }
+
+                    _logger.LogInformation("Call to GetTodo function completed.");
+
+                    return models;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation("Call to GetTodo function was terminated.");
+                    throw new Exception("Call to GetTodo function was terminated.");
+                }
+            }
+        }
+
         public async Task<TodoReadDTO> AddTodo(TodoDTO todo)
         {
             _logger.LogInformation("Call to AddTodo function made");
