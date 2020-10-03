@@ -159,6 +159,31 @@ namespace Todo_API.Services
                 throw new Exception("Call to GetCancelledTodos function was terminated.");
             }
         }
+        public async Task<IEnumerable<TodoReadDTO>> GetCompletedTodos()
+        {
+            _logger.LogInformation("Call to GetCompletedTodos function was made");
+
+            try
+            {
+                var filter = Builders<TodoModel>.Filter.Eq("Completed", true);
+                var results = await this.Todos.Find<TodoModel>(filter).ToListAsync();
+                List<TodoReadDTO> models = new List<TodoReadDTO>();
+                foreach (var item in results)
+                {
+                    var modelDTO = _mapper.Map<TodoReadDTO>(item);
+                    models.Add(modelDTO);
+                }
+
+                _logger.LogInformation("Call to GetCompletedTodos function completed.");
+
+                return models;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Call to GetCompletedTodos function was terminated.");
+                throw new Exception("Call to GetCompletedTodos function was terminated.");
+            }
+        }
         
         public async Task<TodoReadDTO> AddTodo(TodoDTO todo)
         {
