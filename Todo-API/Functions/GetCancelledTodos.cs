@@ -14,19 +14,19 @@ using Todo_API.DTOs;
 
 namespace Todo_API.Functions
 {
-    public class GetMissedTodo
+    public class GetCancelledTodos
     {
         private readonly ITodoService _service;
-        public GetMissedTodo(ITodoService service)
+        public GetCancelledTodos(ITodoService service)
         {
             _service = service;
         }
 
-        [FunctionName(nameof(GetMissedTodo))]
+        [FunctionName(nameof(GetCancelledTodos))]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function,  "get", Route = "missedTodo")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Function,  "get", Route = "cancelledTodo")] HttpRequest req)
         {
-            var results = await this._service.GetMissedTodos();
+            var results = await this._service.GetCancelledTodos();
             return new OkObjectResult(results);
         }
 

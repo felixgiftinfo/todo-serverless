@@ -18,6 +18,7 @@ namespace Todo_API.Services
         Task<IEnumerable<TodoReadDTO>> GetTodoList();
         Task<TodoReadDTO> GetTodoById(string id);
         Task<IEnumerable<TodoReadDTO>> GetMissedTodos();
+        Task<IEnumerable<TodoReadDTO>> GetCancelledTodos();
 
     }
 }
