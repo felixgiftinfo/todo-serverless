@@ -108,6 +108,34 @@ namespace Todo_API.Services
             }
         }
 
+
+        public async Task<IEnumerable<TodoReadDTO>> GetMissedTodos()
+        {
+            _logger.LogInformation("Call to GetMissedTodos function was made");
+
+            try
+            {
+                var filter = Builders<TodoModel>.Filter.Eq("Missed", true);
+                var results = await this.Todos.Find<TodoModel>(filter).ToListAsync();
+                List<TodoReadDTO> models = new List<TodoReadDTO>();
+                foreach (var item in results)
+                {
+                    var modelDTO = _mapper.Map<TodoReadDTO>(item);
+                    models.Add(modelDTO);
+                }
+
+                _logger.LogInformation("Call to GetMissedTodos function completed.");
+
+                return models;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Call to GetMissedTodos function was terminated.");
+                throw new Exception("Call to GetMissedTodos function was terminated.");
+            }
+        }
+
+
         public async Task<TodoReadDTO> AddTodo(TodoDTO todo)
         {
             _logger.LogInformation("Call to AddTodo function made");
