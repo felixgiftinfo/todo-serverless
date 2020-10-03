@@ -111,5 +111,21 @@ namespace Todo_API.Services
                 }
             }
         }
+        public async Task<long> DeleteTodo(string id)
+        {
+            _logger.LogInformation("Call to DeleteTodo function was made");
+            try
+            {
+                var filterResult = Builders<TodoModel>.Filter.Eq("Id", id);
+                DeleteResult result = await this.Todos.DeleteOneAsync(filterResult);
+                _logger.LogInformation("Call to DeleteTodo function completed.");
+                return result.DeletedCount;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Call to DeleteTodo function was terminate");
+                throw ex;
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace Todo_API.Services
     {
         Task<TodoReadDTO> AddTodo(TodoDTO todo);
         Task<bool> UpdateTodo(TodoDTO todo, string id);
+        Task<long> DeleteTodo(string id);
 
     }
 }
