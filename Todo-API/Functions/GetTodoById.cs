@@ -22,7 +22,7 @@ namespace Todo_API.Functions
             _service = service;
         }
 
-        [FunctionName(nameof(DeleteTodo))]
+        [FunctionName(nameof(GetTodoById))]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "todo/{id}")] HttpRequest req, string id)
         {
