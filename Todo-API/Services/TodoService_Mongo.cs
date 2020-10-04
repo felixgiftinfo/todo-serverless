@@ -29,7 +29,8 @@ namespace Todo_API.Services
             _mapper = autoMapper;
             _logger = log;
             _configuration = configuration;
-            var conStr = "mongodb+srv://gift:gift@cluster0.kdx7e.azure.mongodb.net/test?retryWrites=true&w=majority";
+            //var conStr = "mongodb+srv://user:password@cluster0.kdx7e.azure.mongodb.net/test?retryWrites=true&w=majority";
+            string conStr = configuration[ServiceConfiguration.CONNECTION_STRING];
             _client = new MongoClient(conStr);
             this.EnsureDatabase();
         }
