@@ -1,0 +1,14 @@
+https://jfarrell.net/2019/12/28/authenticating-jwt-tokens-with-azure-functions/
+
+https://github.com/jignesht24/Aspnetcore/tree/master/JWTAuthentication
+
+https://damienbod.com/2020/09/24/securing-azure-functions-using-azure-ad-jwt-bearer-token-authentication-for-user-access-tokens/
+
+
+https://www.ben-morris.com/custom-token-authentication-in-azure-functions-using-bindings/
+
+https://github.com/Azure/azure-webjobs-sdk/wiki/Creating-custom-input-and-output-bindings
+
+https://github.com/BenMorris/FunctionsCustomSercuity
+https://www.tomfaltesek.com/azure-functions-input-validation/
+

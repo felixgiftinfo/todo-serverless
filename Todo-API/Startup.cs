@@ -43,7 +43,7 @@ namespace Todo_API
             //    .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true);
             //Configuration = configBuilder.Build();
 
-            builder.Services.AddSingleton<IConfiguration>(Configuration);
+            //builder.Services.AddSingleton<IConfiguration>(Configuration);
 
             builder.Services.AddSingleton<ITodoService, TodoService_Mongo>();
         }

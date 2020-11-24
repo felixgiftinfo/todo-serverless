@@ -24,7 +24,7 @@ namespace Todo_API.Functions
 
         [FunctionName(nameof(GetTodoList))]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function,  "get", Route = "todo")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.User,  "get", Route = "todo")] HttpRequest req)
         {
             var results = await this._service.GetTodoList();
             return new OkObjectResult(results);

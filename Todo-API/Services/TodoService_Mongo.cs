@@ -29,8 +29,13 @@ namespace Todo_API.Services
             _mapper = autoMapper;
             _logger = log;
             _configuration = configuration;
-            //var conStr = "mongodb+srv://user:password@cluster0.kdx7e.azure.mongodb.net/test?retryWrites=true&w=majority";
-            string conStr = configuration[ServiceConfiguration.CONNECTION_STRING];
+            // var conStr = "mongodb+srv://user:password@cluster0.kdx7e.azure.mongodb.net/test?retryWrites=true&w=majority";
+            //var conStr = "mongodb://127.0.0.1:27017/testdb&retryWrites=false";
+            // var conStr = "mongodb://gift:s4DlvGiPqlKuCu1R@cluster0-shard-00-00.qwh5f.mongodb.net:27017,cluster0-shard-00-01.qwh5f.mongodb.net:27017,cluster0-shard-00-02.qwh5f.mongodb.net:27017/testdb?ssl=true&replicaSet=atlas-lc221h-shard-0&authSource=admin&retryWrites=true&w=majority";
+           
+            var conStr = "mongodb://gift:s4DlvGiPqlKuCu1R@cluster0-shard-00-00.qwh5f.mongodb.net:27017,cluster0-shard-00-01.qwh5f.mongodb.net:27017,cluster0-shard-00-02.qwh5f.mongodb.net:27017/AzureDB?ssl=true&replicaSet=atlas-lc221h-shard-0&authSource=admin&retryWrites=true&w=majority";
+            
+            //string conStr = configuration[ServiceConfiguration.CONNECTION_STRING];
             _client = new MongoClient(conStr);
             this.EnsureDatabase();
         }
