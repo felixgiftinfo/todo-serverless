@@ -31,12 +31,9 @@ namespace Todo_Serverless
 
             var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(new Helper.AutomapperProfile()));
             builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
-            // Configuration = (IConfiguration)builder.Services.First(d => d.ServiceType == typeof(IConfiguration)).ImplementationInstance;
-
 
             builder.Services.AddMediatR(typeof(Startup));
 
-            builder.Services.AddSingleton<ITodoService, TodoService_Mongo>();
             builder.Services.AddSingleton<ITodoAPIService, TodoAPIService>();
 
         }
