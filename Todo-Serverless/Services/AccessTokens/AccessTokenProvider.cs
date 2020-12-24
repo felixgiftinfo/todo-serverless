@@ -58,8 +58,7 @@ namespace Todo_Serverless.Services.AccessTokens
                             new Claim(ClaimTypes.Email, user.Email),
                             new Claim("DatabaseName",databaseName),
                             new Claim(ClaimTypes.Expiration, expiresIn.Ticks.ToString())
-                        }),
-
+                        }),                     
                     Expires = expiresIn,
                     Audience = _audience,
                     Issuer = _issuer,
